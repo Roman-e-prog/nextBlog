@@ -1,0 +1,76 @@
+.container{
+    width: 100%;
+    margin-bottom: 10px;
+}
+.userMessageWrapper{
+    width: 80%;
+    margin: 0 auto;
+}
+.fieldWrapper{
+    width: 100%;
+    border:1px solid var(--elementColor);
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+    padding: 5px;
+}
+/* answer */
+.close{
+    font-size: 20px;
+    cursor:pointer;
+    margin-left: 10px;
+}
+.formWrapper{
+    width: 80%;
+    margin: 5px auto;
+}
+.formGroup{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+.sendBtn{
+    width: 200px;
+    padding: 5px;
+    margin-top: 5px;
+    background: var(--secondBgColor);
+    color:var(--fontColor);
+    cursor:pointer;
+}
+.searchWrapper{
+    width: 80%;
+    margin: 0 auto;
+}
+.input{
+    padding: 1px;
+    min-height: 20px;
+    width: 50%;
+    border:none;
+    box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.75);
+-webkit-box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.75);
+-moz-box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.75);
+}
+.allAnswers{
+    width: 80%;
+    margin: 10px auto;
+}
+.functions{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.icons{
+    width: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.icon{
+    cursor:pointer;
+}
+@media screen and (max-width:500px) {
+    .functions{
+        flex-direction: column;
+    }
+}

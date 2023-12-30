@@ -1,0 +1,78 @@
+.container{
+    width: 100%;
+    min-height: calc(100vh - 120px - 80px);
+}
+.formular{
+    width: 80%;
+    margin: 20px auto;
+}
+.topContent{
+    padding: 0 60px;
+}
+.elements{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.headRow{
+    border:none;
+    width:95%;
+    height:2px;
+    background:var(--elementColor)
+}
+.author{
+    font-style: italic;
+}
+.article{
+    padding:20px 60px;
+}
+.imagesWrapper{
+    padding: 20px 60px;
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.images{
+    width:200px;
+    height:200px;
+    margin: 5px;
+}
+@media screen and (max-width:700px) {
+    .images{
+        width:150px;
+        height:150px;
+        margin: 5px;
+    }
+    .images:hover{
+        width:200px;
+        height:200px; 
+    }
+}
+@media screen and (max-width:600px) {
+    .images{
+        width:100px;
+        height:100px;
+        margin: 5px;
+    }
+    .images:hover{
+        width:200px;
+        height:200px; 
+    }
+    .formular{
+        width: 90%;
+    }
+}
+@media screen and (max-width:400px) {
+    .images{
+        width:100px;
+        height:100px;
+        margin: 5px;
+    }
+    .images:hover{
+        width:200px;
+        height:200px; 
+    }
+    .formular{
+        width: 100%;
+    }
+}

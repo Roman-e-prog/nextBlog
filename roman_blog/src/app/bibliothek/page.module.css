@@ -1,0 +1,43 @@
+.container{
+    width: 100%;
+    min-height: calc(100vh - 120px - 80px);
+}
+.headlineWrapper, .headerWrapper{
+    width: 100%;
+}
+.sliderWrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    transition: all 1.8s ease-in-out;
+}
+.iconLeft{
+    width:50px;
+    height:50px;
+    position: absolute;
+    top:0;
+    bottom:0;
+    margin:auto;
+    left:10px;
+    cursor:pointer;
+    z-index:2;
+}
+.iconRight{
+    width:50px;
+    height:50px;
+    position: absolute;
+    top:0;
+    bottom:0;
+    margin:auto;
+    right:10px;
+    cursor:pointer;
+    z-index: 2;
+}
+
+.iframe{
+    height:250px;
+}
+.jsWrapper{
+    margin-bottom: 60px;
+}

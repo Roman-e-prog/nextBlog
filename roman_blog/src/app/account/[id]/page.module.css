@@ -1,0 +1,194 @@
+.container{
+    width: 100%;
+    min-height: calc(100vh - 120px - 80px);
+}
+.headerWrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.headline{
+    font-weight: 300;
+    margin-left: 40px;
+}
+.deleteWrapper{
+    width: 300px;
+    margin-right: 40px;
+    padding: 5px;
+    position:relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:all 1s ease;
+}
+.warn{
+    width: 200px;
+    padding: 10px;
+    background: var(--secondBgColor);
+    color:var(--fontColor);
+    cursor: pointer;
+}
+.warningModule{
+    width: 100%;
+    height: 100%;
+}
+.warnHeadline{
+    color:red;
+    font-weight: 300;
+    margin-bottom: 10px;
+}
+.btnWrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.yes, .no, .messageBtn{
+    width: 30%;
+    padding: 10px;
+    min-height:100px;
+    margin: 5px;
+    flex-grow: 1;
+    cursor:pointer;
+    color:var(--fontColor)
+}
+.no{
+    background:var(--elementColor);
+}
+.messageBtn{
+    background: var(--secondBgColor);
+}
+.yes{
+    background: red;
+}
+.messageModule{
+    position:absolute;
+    top:0;
+    left:0px;
+    width: inherit;
+    height: inherit;
+    padding: 5px;
+    background: black;
+}
+.messageForm{
+    width: inherit;
+    height:inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.answerWrapper{
+    width: 100%;
+    margin: 20px 0;
+}
+.answerField{
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid var(--elementColor);
+}
+.formWrapper{
+    width: 100%;
+}
+.form{
+    width: 100%;
+    display:flex;
+    align-items: center;
+    height:300px;
+    justify-content: space-around;
+}
+.imageDrop{
+    width: 40%;
+    border:1px solid var(--elementColor);
+    min-height:200;
+}
+.inputfileContainer{
+    width: 100%;
+    height: 100%;
+}
+.userupdate{
+    width: 30%;
+}
+.updateHeadline{
+    font-size: 20px;
+    font-weight: 300;
+}
+.headline{
+    font-weight: 300;
+}
+.formGroup{
+    width: 100%;
+    display: flex;
+}
+.label{
+    width: 40%;
+}
+.input{
+    background:inherit;
+    color:inherit;
+    border:none;
+    width: 60%;
+}
+.sendBtn{
+    width: 200px;
+    padding: 5px;
+    background:var(--secondBgColor);
+    color:var(--fontColor);
+}
+.questionWrapper{
+    margin-top: 20px;
+}
+.fieldWrapper{
+    width: 80%;
+    margin: 10px auto;
+    border:1px solid var(--elementColor);
+    padding: 10px;
+    overflow-x: auto;
+}
+.theme{
+    width: 90%;
+    display: flex;
+    align-items: center;
+
+    & .headline{
+        font-size: 20px;
+    }
+}
+.icons{
+    margin-left: 20px;
+    cursor:pointer;
+}
+@media screen and (max-width:700px) {
+    .form{
+        flex-direction: column;
+        margin-top: 10px;
+    }
+    .sendBtn{
+        margin-top: 10px;
+    }
+    .imageDrop{
+        width: 200px;
+        height: 200px;
+    }
+}
+@media screen and (max-width:500px) {
+    .form{
+        height:500px;
+        flex-direction: column;
+        margin: 30px 0;
+    }
+    .sendBtn{
+        margin: 20px 0;
+    }
+    .fieldWrapper{
+        width: 90%;
+        margin: 0 auto;
+    }
+    .headerWrapper{
+        flex-direction: column;
+    }
+    .userupdate{
+        width: 50%;
+    }
+}

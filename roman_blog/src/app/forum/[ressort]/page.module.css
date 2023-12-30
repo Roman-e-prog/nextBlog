@@ -1,0 +1,85 @@
+.container{
+    width: 100%;
+    min-height: calc(100vh - 120px - 80px);
+    padding: 10px;
+}
+
+.topicWrapper{
+    width: 80%;
+    display: flex;
+    align-items: center;
+    margin: 20px auto;
+    justify-content: flex-end;
+}
+.topicBtn{
+    width: 200px;
+    border:none;
+    background: var(--elementColor);
+    color:var(--fontColor);
+    padding: 10px;
+    cursor:pointer;
+    box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 6px 4px 5px 0px rgba(0,0,0,0.75);
+}
+.fieldWrapper{
+    width: 80%;
+    margin: 10px auto;
+    padding: 10px;
+    border:1px solid var(--elementColor);
+}
+.headingWrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.themeWrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;  
+}
+.themeHolder{
+    width: 80%;
+}
+.viewsWrapper{
+    width: 20%;
+}
+.questionWrapper{
+    padding: 10px;
+    overflow-x: auto;
+}
+.question{
+    white-space: pre-wrap;
+}
+.likeWrapper{
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+.solved{
+    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.icons{
+    margin-right: 40px;
+}
+.time{
+    margin: 0 10px;
+}
+.contentWrapper{
+    margin-top: 10px;
+}
+@media screen and (max-width:650px) {
+    .likeWrapper{
+        justify-content: center;
+    }
+}
+@media screen and (max-width:500px) {
+    .questionWrapper{
+        padding: 0;
+    }
+}

@@ -1,0 +1,44 @@
+export const navLinks = [
+    {
+        id:1,
+        text:"Über mich",
+        url:"/uebermich",
+    },
+    {
+        id:2,
+        text:"Blog",
+        url:"/blog",
+    },
+    {
+        id:3,
+        text:"Forum",
+        url:"/forum",
+    },
+    {
+        id:4,
+        text:"Bibliothek",
+        url:"/bibliothek",
+    },
+    {
+        id:5,
+        text:"Register",
+        url:"/authUser/register",
+    },
+]
+export const ForumLinks = [
+    {
+        id:1,
+        ressort:"HTML",
+        text:"HTML",
+    },
+    {
+        id:2,
+        ressort:"CSS",
+        text:"CSS",
+    },
+    {
+        id:3,
+        ressort:"JavaScript",
+        text:"JavaScript",
+    },
+]

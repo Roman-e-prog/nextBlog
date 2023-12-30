@@ -1,0 +1,60 @@
+.container{
+    width: 100%;
+}
+.close{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    & .x{
+        font-size:20px;
+        cursor:pointer;
+        margin: 10px 20px;
+    }
+}
+.moduleWrapper{
+    width: 100%;
+    min-height:250px;
+    display: flex;
+    align-items: center;
+}
+.questionWrapper{
+    width: 100%;
+    min-height:inherit;
+}
+.form{
+    width: 100%;
+}
+.headerGroup{
+    width: inherit;
+    height:20%;
+    display: flex;
+    align-items: center;
+}
+.formGroup{
+    width:inherit;
+    display: flex;
+}
+.input{
+    width:50%;
+    height:20px;
+    background:inherit;
+    color:inherit;
+    margin:0;
+    padding:2px;
+}
+.buttonWrapper{
+    margin-top: 10px;
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content:flex-end;
+}
+.sendBtn{
+    width: 200px;
+    padding: 5px;
+    margin: 10px;
+    background: var(--secondBgColor);
+    color:var(--fontColor);
+    cursor: pointer;
+}

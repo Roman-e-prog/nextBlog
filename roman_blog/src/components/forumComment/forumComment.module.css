@@ -1,0 +1,26 @@
+.container{
+    width: 100%;
+}
+.headlineWrapper{
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 0 200px;
+    justify-content: space-between;
+}
+.form{
+    width: 100%;
+}
+.sendBtn{
+    width: 200px;
+    padding: 5px;
+    background: var(--secondBgColor);
+    color:var(--fontColor);
+}
+.likesWrapper{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}

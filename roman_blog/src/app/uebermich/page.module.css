@@ -1,0 +1,28 @@
+.container{
+    width: 100%;
+    min-height: calc(100vh - 120px - 80px);
+}
+.headerWrapper{
+    padding-left: 40px;
+}
+.headline{
+    font-size: 32px;
+    font-weight: 300;
+}
+.ueberMichWrapper{
+    width: 80%;
+    margin: 0 auto;
+}
+.content{
+    white-space: pre-wrap;
+}
+@media screen and (max-width:700px) {
+    .headline{
+        font-size: 28px;
+    }
+}
+@media screen and (max-width:600px) {
+    .headline{
+        font-size: 24px;
+    }
+}

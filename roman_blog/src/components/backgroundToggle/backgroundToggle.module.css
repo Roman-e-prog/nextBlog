@@ -1,0 +1,20 @@
+.toggleContainer{
+    height:18px;
+    width: 40px;
+    border-radius: 30px;
+    border: 2px solid var(--fontColor);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-right:60px;
+    padding: 1px 2px;
+    cursor: pointer;
+}
+.toggleBtn{
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: var(--elementColor);
+    position: absolute;
+}

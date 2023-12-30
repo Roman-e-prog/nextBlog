@@ -1,0 +1,98 @@
+.main {
+ width: 100%;
+ min-height: calc(100vh - 120px - 80px);
+ display: flex;
+}
+.frontImage{
+  width: 50%;
+  min-height: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.image{
+  width:90%;
+  height:auto;
+}
+.greeting{
+  width: 50%;
+  padding: 20px;
+}
+.heading{
+  font-size: 66px;
+  font-weight: 300;
+}
+.bloggerName{
+  font-size: 22px;
+  font-weight: 300;
+}
+@media screen and (max-width:1040px){
+  .heading{
+    font-size:60px;
+  }
+  .bloggerName{
+    font-size: 20px;
+  }
+}
+@media screen and (max-width:980px){
+  .heading{
+    font-size:50px;
+    margin-top: 60px;
+  }  
+}
+@media screen and (max-width:900px){
+  .frontImage{
+    padding:0;
+  }
+  .heading{
+    margin-top: 80px;
+  }
+} 
+@media screen and (max-width:700px){
+  .greeting{
+    padding:0;
+  }
+  .heading{
+    font-size:40px;
+    margin-left: 20px;
+  }
+  .bloggerName{
+    margin-left: 20px;
+  }
+  .image{
+    height:300px;
+  }
+} 
+@media screen and (max-width:600px){
+  .heading{
+    font-size:35px;
+    margin-left: 20px;
+  }
+  .bloggerName{
+    margin-left: 20px;
+  }
+  .image{
+    height:250px;
+  }
+} 
+@media screen and (max-width:530px){
+  .main{
+    flex-direction: column;
+  }
+  .frontImage, .greeting{
+    width: 80%;
+    min-height:200px;
+    margin: 5px auto;
+    text-align: center;
+  }
+  .image{
+    height:auto;
+  }
+  .heading{
+    margin: 10px 0;
+    font-size: 26px;
+  }
+  .bloggerName{
+    font-size: 16px;
+  }
+}
