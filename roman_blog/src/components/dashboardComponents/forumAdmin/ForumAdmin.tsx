@@ -2,8 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import styles from './forumAdmin.module.css'
 import {useForm} from 'react-hook-form';
-import useSWR from 'swr';
-import { useSWRConfig } from 'swr';
+import useSWR,{mutate} from 'swr';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { ForumDocument } from '@/models/Forum';
@@ -30,7 +29,7 @@ const ForumAdmin = () => {
         })
     },[])
     const filteredAdmin = data.filter((item:ForumDocument)=>item.senderIsAdmin === true);
-    const {mutate} = useSWRConfig();
+    
     const { data: session, status } = useSession();
     const user = session?.user;
    
@@ -70,7 +69,7 @@ const ForumAdmin = () => {
         if(isSubmitted){
             reset()
         }
-    },[isSubmitted])
+    },[isSubmitted, reset])
     const [edit, setEdit] = useState(false);
     const [editId, setEditId] = useState("");
     const [editData, setEditData] = useState<ForumDocument | null>(null)

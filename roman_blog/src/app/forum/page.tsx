@@ -5,9 +5,10 @@ import Link from 'next/link';
 import { ForumThemesDocument } from '@/models/ForumThemes';
 import { getServerSession } from "next-auth";
 import { authOptions } from '@/utils/authoptions';
-
+export const dynamic = "force-dynamic"; // this both was the solution for prerendering error on build command
+export const fetchCache = "force-no-store";
 async function getData(){
-  const res = await fetch('http://localhost:3000/api/forumThemes/', {cache:'no-store'});
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/forumThemes/`, {cache:'no-store'});
 
   if(!res.ok){
     throw new Error("Keine Antwort")

@@ -1,7 +1,7 @@
 "use client"
 import React,{useState, useEffect} from 'react'
 import styles from './messages.module.css'
-import useSWR, {useSWRConfig} from 'swr';
+import useSWR, {mutate} from 'swr';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import { UserMessagesDocument } from '@/models/UserMessages';
@@ -17,7 +17,6 @@ const fetcher = async (url:string)=>{
 const Messages = () => {
     const {data:userMessagedata, error:userMessageError, isLoading} = useSWR('/api/userMessages/', fetcher,{revalidateOnFocus:false});
     const {data:adminMessagesdata, error: adminMessagesError} = useSWR('/api/adminMessages/', fetcher,{revalidateOnFocus:false})
-    const {mutate} = useSWRConfig();
     
     //errorHandling
     useEffect(()=>{
@@ -45,7 +44,6 @@ const Messages = () => {
         setQuestionId(id);
         setSenderId(senderId);
         setSenderName(senderName);
-        console.log(id, senderId, senderName)
     }
     const onSubmit = async (e:React.FormEvent)=>{
         e.preventDefault();

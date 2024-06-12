@@ -5,11 +5,14 @@ import {NextResponse, NextRequest} from 'next/server';
 export const PUT = async (req:NextRequest, {params}:any)=>{
     const id = params.id;
     const data = await req.json();
+    console.log(data, 'hier backend')
+    console.log(id)
     try{
         await connect();
         const updatedForumTheme = await ForumThemes.findByIdAndUpdate(id, data,{new:true})
         return new NextResponse(JSON.stringify(updatedForumTheme),{status:200})
     } catch(error){
+        console.log(error)
         return new NextResponse("Nicht gefunden", {status:404})
     }
 }

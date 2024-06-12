@@ -1,7 +1,7 @@
 "use client"
 import React,{useEffect, useState} from 'react'
 import styles from './forumThemes.module.css'
-import useSWR,{useSWRConfig} from 'swr';
+import useSWR,{mutate} from 'swr';
 import { ForumThemesDocument } from '@/models/ForumThemes';
 import Spinner from '@/components/spinner/Spinner';
 import 'react-toastify/dist/ReactToastify.css';
@@ -19,13 +19,19 @@ const fetcher = async (url: string) => {
     content:string,
   }
 const ForumThemes = () => {
-    const { data, error, isLoading } = useSWR('/api/forumThemes/', fetcher);
-    useEffect(()=>{
-        if(error){
-            toast.error(error)
+    const { data, error, isLoading} = useSWR('/api/forumThemes/', fetcher);
+    useEffect(() => {
+        if (data && data.length) {
+          console.log(data, 'here data');
         }
-    },[])
-    const {mutate} = useSWRConfig();
+        if(error){
+            console.log(error)
+        }
+        if(isLoading){
+            console.log('yes i am loading')
+        }
+      }, [data, error, isLoading]);
+    // const {mutate} = useSWRConfig();
     const {register, handleSubmit, formState, reset} = useForm<FormValues>({
         defaultValues:{
             theme:"",
@@ -56,7 +62,7 @@ const ForumThemes = () => {
         if(isSubmitted){
             reset();
         }
-    },[])
+    },[isSubmitted, reset])
     const [edit, setEdit] = useState(false);
     const [editId, setEditId] = useState("");
     const [editData, setEditData] = useState<ForumThemesDocument | null>(null)
@@ -75,7 +81,7 @@ const ForumThemes = () => {
         } catch(error:any){
             toast.error(error)
         }
-        mutate('/api/forumThemes')
+        mutate('/api/forumThemes/')
     }
     if(isLoading){
         return <Spinner data-testid="spinner"/>
@@ -85,14 +91,14 @@ const ForumThemes = () => {
         <ToastContainer/>
         <div className={styles.themesWrapper}>
             {data ? data.map((item:ForumThemesDocument)=>(
-                <div className={styles.fieldWrapper} key={item._id}>
+                <div className={styles.fieldWrapper} key={item._id} data-testid="forumThemesFieldWrapper">
                     <div className={styles.themeWrapper}>
                         <div className={styles.headingWrapper}>
-                            <h3>{item.theme}</h3>
-                            <div className={styles.icons} onClick={()=>handleEdit(item._id)}><span className="material-symbols-outlined" style={{cursor:"pointer"}} data-testid="editForumThemes">Edit</span></div>
-                            <div className={styles.icons} onClick={()=>handleDelete(item._id)}><span className="material-symbols-outlined" style={{cursor:"pointer"}} data-testid="deleteForumThemes">Delete</span></div>
+                            <h3 data-testid="themeEntry">{item.theme}</h3>
+                            <div className={styles.icons} onClick={()=>handleEdit(item._id)} data-testid="editForumThemes"><span className="material-symbols-outlined" style={{cursor:"pointer"}}>Edit</span></div>
+                            <div className={styles.icons} onClick={()=>handleDelete(item._id)} data-testid="deleteForumThemes"><span className="material-symbols-outlined" style={{cursor:"pointer"}}>Delete</span></div>
                         </div>
-                        <p>{item.content}</p>
+                        <p data-testid="contentEntry">{item.content}</p>
                     </div>
                 </div>
             )):null}
@@ -102,12 +108,13 @@ const ForumThemes = () => {
                 <h3 className={styles.headline}>Neues Thema hochladen</h3>
             </div>
             <div className={styles.formWrapper}>
-                {edit ? <EditForumThemes setEdit={setEdit} editId={editId} editData={editData} mutate={()=>mutate('/api/forumThemes')}/> :   
+                {edit ? <EditForumThemes setEdit={setEdit} editId={editId} edit={edit} editData={editData} mutate={()=>mutate('/api/forumThemes/')}/> :   
                 <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
                     <div className={styles.formGroup}>
                     <label htmlFor="theme" className={styles.label}>Thema</label>
                     <input type="text"
                         id="theme"
+                        data-testid="theme"
                         className={styles.input}
                         {...register("theme",{
                             required:{
@@ -119,9 +126,10 @@ const ForumThemes = () => {
                         <div className="errors">{errors.theme?.message}</div>
                 </div>
                     <div className={styles.formGroup}>
-                    <label htmlFor="content" className={styles.label}>Inhalt</label>
+                    <label htmlFor="content" className={styles.label}>Foruminhalt</label>
                     <input type="text"
                         id="content"
+                        data-testid="content"
                         className={styles.input}
                         {...register("content",{
                             required:{

@@ -1,7 +1,7 @@
 "use client"
 import React, {useEffect, useCallback, useState} from 'react';
 import styles from './page.module.css';
-import useSWR,{useSWRConfig} from 'swr';
+import useSWR,{mutate} from 'swr';
 import { useParams } from 'next/navigation';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
@@ -31,14 +31,14 @@ const Account = () => {
   // const {data:forumdata, error:forumerror} = useSWR(userdata && '/api/forum/', fetcher, {revalidateOnFocus:false});
   // const {data:adminMessages, error:adminMessageserror} = useSWR(userdata && '/api/adminMessages/', fetcher);
   // console.log(adminMessages);
-  const {mutate} = useSWRConfig();
+ 
   const [userdata, setUserdata] = useState({
     vorname:"",
     nachname:"",
     username:"",
   })
   const {vorname, nachname, username} = userdata;
-  console.log(userdata.vorname, userdata.nachname, userdata.username)
+ 
   const [forumdata, setForumdata] = useState<ForumDocument[]>([])
   const [adminMessages, setAdminMessages] = useState<AdminMessageDocument[]>([])
 useEffect(()=>{
@@ -47,7 +47,7 @@ useEffect(()=>{
   .then((data)=>{
     setUserdata({...data})
   })
-},[])
+},[id])
 useEffect(()=>{
   fetch('/api/forum/')
   .then((res)=>res.json())
@@ -228,7 +228,7 @@ const handleDelete = async (id:string)=>{
               {
                 isDragActive ?
                   <p>Drop the files here ...</p> :
-                  file ? <p>{file.name}</p> : <p>Drag 'n' drop some files here, or click to select files</p>
+                  file ? <p>{file.name}</p> : <p>Drag and drop some files here, or click to select files</p>
               }
               {preview ? <img src={preview} alt="preview"/> : null}
             </div>

@@ -3,8 +3,10 @@ import styles from './page.module.css'
 import { BlogPostDocument } from '@/models/BlogPost';
 import Image from 'next/image';
 import Link from 'next/link';
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 const getData = async ()=>{
-  const response = await fetch('http://localhost:3000/api/blogPosts/', {cache:'no-store'});
+  const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/blogPosts/`, {cache:'no-store'});
   if(!response.ok){
     throw new Error("Derzeit keine Einträge")
   }

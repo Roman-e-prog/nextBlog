@@ -1,5 +1,5 @@
 "use client"
-import React,{ChangeEvent, useState} from 'react'
+import React,{ChangeEvent, useState, useEffect} from 'react'
 import styles from './editBlogpost.module.css'
 import { BlogPostDocument } from '@/models/BlogPost';
 import 'react-toastify/dist/ReactToastify.css';
@@ -16,6 +16,12 @@ type FormValues = {
 const EditBlogPost = (props:{setEdit:React.Dispatch<React.SetStateAction<boolean>>, editId:string, editData:BlogPostDocument | null, mutate:Function}) => {
     const editData = props.editData;
     const id = props.editId;
+    const mutate = props.mutate
+    useEffect(()=>{
+        console.log('page is rendered')
+    console.log(mutate, 'here in blogPostEdit')
+    },[mutate])
+    
     const {register, handleSubmit, reset, formState, watch} = useForm<FormValues>({
         defaultValues:{
             theme:editData?.theme,
@@ -40,9 +46,9 @@ const EditBlogPost = (props:{setEdit:React.Dispatch<React.SetStateAction<boolean
             images: newImages
         }))
    }
-   console.log("Hier Images",filedata.images);
+   
     const onSubmit = async (data:FormValues)=>{
-        if(!filedata.images.length){
+        if(!filedata.images || !filedata.images.length){
             const blogPostData = {
                 theme:data.theme,
                 author:data.author,
@@ -50,15 +56,17 @@ const EditBlogPost = (props:{setEdit:React.Dispatch<React.SetStateAction<boolean
                 content:data.content,
             }
             try{
-                await fetch(`/api/blogPosts/${id}`,{
+                const response = await fetch(`/api/blogPosts/${id}`,{
                     method:"PUT",
                     headers:{
                         'Content-Type':'application/json'
                     },
                     body:JSON.stringify(blogPostData)
                 })
-                props.mutate('api/blogPosts')
+                const updatedData = await response.json();
+                await mutate('/api/blogPosts/', updatedData, false)
                 toast.success("Update erfolgreich")
+                props.setEdit(false)
             } catch(error:any){
                 toast.error(error.message)
             }
@@ -76,16 +84,15 @@ const EditBlogPost = (props:{setEdit:React.Dispatch<React.SetStateAction<boolean
                 }
             });
             try{
-                const res = await fetch(`/api/blogPosts/${id}`,{
+                const response = await fetch(`/api/blogPosts/${id}`,{
                     method:"PUT",
                     body:formdata,
                 })
-                console.log(res)
-                props.mutate('/api/blogPosts')
+                const updatedData = await response.json()
+                await mutate('/api/blogPosts/', updatedData, false)
                 toast.success("Update erfolgreich")
                 props.setEdit(false)
             } catch(error:any){
-                console.log(error)
                 toast.error(error.message)
             }
         }
@@ -104,6 +111,7 @@ const EditBlogPost = (props:{setEdit:React.Dispatch<React.SetStateAction<boolean
                     <input type="text"
                             id="theme"
                             className={styles.input}
+                            data-testid="blogpostTheme"
                             {...register("theme",{
                                 required:{
                                     value:true,
@@ -117,6 +125,7 @@ const EditBlogPost = (props:{setEdit:React.Dispatch<React.SetStateAction<boolean
                     <input type="text"
                             id="author"
                             className={styles.input}
+                            data-testid="blogpostAuthor"
                             {...register("author",{
                                 required:{
                                     value:true,
@@ -130,6 +139,7 @@ const EditBlogPost = (props:{setEdit:React.Dispatch<React.SetStateAction<boolean
                     <input type="text"
                             id="description"
                             className={styles.input}
+                            data-testid="blogpostDescription"
                             {...register("description",{
                                 required:{
                                     value:true,
@@ -144,6 +154,7 @@ const EditBlogPost = (props:{setEdit:React.Dispatch<React.SetStateAction<boolean
                             cols={50}
                             rows={50}
                             id="content"
+                            data-testid="blogpostContent"
                             className={styles.input}
                             {...register("content",{
                                 required:{

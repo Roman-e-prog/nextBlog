@@ -1,6 +1,6 @@
 "use client"
 import React,{useEffect, useState} from 'react'
-import useSWR,{useSWRConfig} from 'swr';
+import useSWR,{mutate} from 'swr';
 import {useFieldArray, useForm} from 'react-hook-form';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
@@ -29,7 +29,7 @@ const Bibliothek = () => {
             toast.error(error)
         }
     },[error])
-    const {mutate} = useSWRConfig();
+  
     const {register, handleSubmit, watch, formState, reset, control} = useForm<FormValues>({
         defaultValues:{
             videos:[{
@@ -66,7 +66,7 @@ const Bibliothek = () => {
         if(isSubmitted){
             reset()
         }
-    },[isSubmitted])
+    },[isSubmitted, reset])
     const [edit, setEdit] = useState(false);
     const [editData, setEditData] = useState<BibliothekDocument | null>(null);
     const [editId, setEditId] = useState("");
@@ -84,6 +84,7 @@ const Bibliothek = () => {
     const deleteAll = async (id:string)=>{
         await fetch(`/api/bibliothek/${id}`)
         toast.success("Du hast tatsächlich gerade die gesamte Blog-Bibliothek gelöscht.")
+        mutate('/api/bibliothek/')
     }
     const youtubeUrl = "https://www.youtube.com/embed/";
     if(isLoading){
@@ -127,7 +128,7 @@ const Bibliothek = () => {
                 <h3 className={styles.headline}>Neue Bibliothek - Videos nachpflegen oder löschen über den Bleistift in der obigen Anzeige.</h3>
             </div>
             <div className={styles.formWrapper}>
-                {edit ? <EditBibliothek setEdit={setEdit} editId={editId} editData={editData} mutate={()=>mutate('/api/bibliothek')}/> :  <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+                {edit ? <EditBibliothek setEdit={setEdit} editId={editId} editData={editData} mutate={()=>mutate('/api/bibliothek')}/> :  <form className={styles.form} onSubmit={handleSubmit(onSubmit)} data-testid="bibliothekForm">
                 {fields && fields.map((field, index)=>(
                     <div className={styles.formGroup} key={field.id}>
                         <input type="text" 

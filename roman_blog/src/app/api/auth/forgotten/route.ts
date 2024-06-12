@@ -1,17 +1,16 @@
 import User from "@/models/User";
 import PasswordReset from "@/models/PasswordReset";
 import connect from "@/utils/db";
-import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
+// import { NextApiRequest, NextApiResponse } from "next";
 import bcrypt from "bcrypt"
-import generateApiKey from 'generate-api-key';
+import { NextRequest, NextResponse } from "next/server";
 const passGen = require('passgen');
 import nodemailer from 'nodemailer';
 const transporter = nodemailer.createTransport({
     host: '0.0.0.0',
     port:   1025,
 })
-const handler = async (req:NextApiRequest)=>{
+const handler = async (req:NextRequest, res:NextResponse)=>{
     //@ts-ignore
     const data = await req.json();
     const {email, type, resetToken, password} = data;
@@ -27,7 +26,7 @@ const handler = async (req:NextApiRequest)=>{
                 })
                 await newPasswordReset.save();
                 const url = `http://localhost:3000/reset/${token}`
-                console.log(url);
+            
             await transporter.sendMail({
                 from:'admin@example.com',
                 to:email,

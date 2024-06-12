@@ -26,7 +26,7 @@ const EditAdminMessages = (props:{setEdit: React.Dispatch<React.SetStateAction<b
                 },
                 body:JSON.stringify(editAdminMessage)
             })
-            props.mutate(`/api/adminMessages/${id}`)
+            await props.mutate('/api/adminMessages/')
             toast.success("Antwort erfolgreich upgedated")
             setEdit(false);
         } catch(error:any){

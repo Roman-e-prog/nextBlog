@@ -1,7 +1,7 @@
 "use client"
 import React,{useEffect, useRef, useState} from 'react'
 import styles from './blogPost.module.css'
-import useSWR,{useSWRConfig} from 'swr';
+import useSWR,{mutate} from 'swr';
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
 import {useForm} from 'react-hook-form'
@@ -28,8 +28,11 @@ const BlogPost = () => {
         if(error){
             toast.error(error)
         }
+        if(data && data.length){
+            console.log(data, 'here in the Component')
+        }
     },[error])
-    const {mutate} = useSWRConfig();
+    
     const {register, handleSubmit, formState, watch, reset} = useForm<FormValues>({
         defaultValues:{
             theme:"",
@@ -65,7 +68,7 @@ const BlogPost = () => {
         if(isSubmitted){
             reset();
         }
-    },[isSubmitted])
+    },[isSubmitted, reset])
     const onSubmit = async (data:FormValues)=>{
         if(!data.images.length){
             const blogPostData = {
@@ -75,14 +78,14 @@ const BlogPost = () => {
                 content:data.content,
             }
             try{
-                await fetch('/api/blogPosts',{
+                await fetch('/api/blogPosts/',{
                     method:"POST",
                     headers:{
                         'Content-Type':'application/json'
                     },
                     body:JSON.stringify(blogPostData)
                 })
-                mutate('/api/blogPosts')
+                mutate('/api/blogPosts/')
             } catch(error:any){
                 toast.error(error.message)
             }
@@ -92,6 +95,7 @@ const BlogPost = () => {
             Object.entries(data).forEach(([key, value])=>{
                 if (key === 'images' && value.length) {
                     for (let i = 0; i < value.length; i++) {
+                        console.log(value[i], 'here value')
                         formData.append(key, value[i]);
                     }
                 } else {
@@ -103,8 +107,9 @@ const BlogPost = () => {
                     method:"POST",
                     body:formData
                 })
-                mutate('/api/blogPosts')
+                mutate('/api/blogPosts/')
             } catch(error:any){
+                console.log(error, 'hier ein Fehler')
                 toast.error(error)
             }
         } 
@@ -143,21 +148,21 @@ const BlogPost = () => {
             {data ? data.map((item:BlogPostDocument)=>(
                 <div className={styles.fieldWrapper} key={item._id} data-testid="blogPostField">
                     <div className={styles.textWrapper}>
-                        <h3>{item.theme}</h3>
-                        <h4>{item.author}</h4>
-                        <p>{item.description}</p>
-                        <p>{item.content}</p>
+                        <h3 data-testid="blogTheme">{item.theme}</h3>
+                        <h4 data-testid="blogAuthor">{item.author}</h4>
+                        <p data-testid="blogDescription">{item.description}</p>
+                        <p data-testid="blogContent">{item.content}</p>
                     </div>
                     <div className={styles.imageWrapper}>
-                        {item.images.length > 0 ? item.images.map((image:string, index:number)=>(
+                        {item.images && item.images.length > 0 ? item.images.map((image:string, index:number)=>(
                             <div className={styles.singleImage} key={index}>
-                                <Image src={image} alt={`Bild Nr: ${index + 1}`} title={`Bild Nr: ${index + 1}`} width={150} height={150} className={styles.blogImage}/>
+                                <Image src={image} alt={`Bild Nr: ${index + 1}`} title={`Bild Nr: ${index + 1}`} width={150} height={150} className={styles.blogImage} data-testid="blogImage"/>
                             </div>
                         )):null}
                     </div>
                     <div className={styles.iconWrapper}>
-                        <div className={styles.icons} onClick={()=>handleEdit(item._id)}><span className="material-symbols-outlined" data-testid="editblogposts">Edit</span></div>
-                        <div className={styles.icons} onClick={()=>handleDelete(item._id)} data-testid="deleteblogposts"><span className="material-symbols-outlined">Delete</span></div>
+                        <div className={styles.icons} onClick={()=>handleEdit(item._id)} data-testid="editBlogpost"><span className="material-symbols-outlined">Edit</span></div>
+                        <div className={styles.icons} onClick={()=>handleDelete(item._id)} data-testid="deleteBlogpost"><span className="material-symbols-outlined">Delete</span></div>
                     </div>
                 </div>
             )):null}
@@ -233,6 +238,7 @@ const BlogPost = () => {
                         {...register("images")}
                         id="images"
                         multiple
+                        data-testid="images"
                         className={styles.input}
                         />
                         <div className={styles.previewWrapper}>

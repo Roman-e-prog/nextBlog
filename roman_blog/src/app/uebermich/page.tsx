@@ -1,8 +1,11 @@
 import React from 'react'
 import styles from './page.module.css'
 import { UeberMichDocument } from '@/models/UeberMich'
+
+export const dynamic = "force-dynamic";
+export const fetchCache = "force-no-store";
 const getData = async()=>{
-   const res = await fetch('http://localhost:3000/api/ueberMich/', {cache:'no-store'})
+   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/ueberMich/`, {cache:'no-store'})
    if(!res.ok){
     throw new Error("Keine Daten")
    }

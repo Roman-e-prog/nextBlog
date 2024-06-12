@@ -1,9 +1,9 @@
 import ForumThemes from "@/models/ForumThemes";
 import connect from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
-export const POST = async (req:NextApiRequest, res:NextApiResponse)=>{
+export const POST = async (req:NextRequest, res:NextResponse)=>{
     //@ts-ignore
     const data = await req.json();
     const newForumTheme = new ForumThemes(data);
@@ -16,7 +16,7 @@ export const POST = async (req:NextApiRequest, res:NextApiResponse)=>{
         return new NextResponse("Hochladen des Themas nicht möglich", {status:403})
     }
 }
-export const GET = async (req:NextApiRequest, res:NextApiResponse)=>{
+export const GET = async (req:NextRequest, res:NextResponse)=>{
     try{
         await connect();
         const getAllForumThemes = await ForumThemes.find();

@@ -53,7 +53,6 @@ const ForumQuestion = (props:{ressort:string | string[], mutate:Function, setQue
         ressort:ressort,
       })
       const {theme} = formdata;
-      console.log(theme)
       //suche
       const [filteredForum, setFilteredForum] = useState<ForumDocument[]>([]);
       useEffect(()=>{
@@ -62,7 +61,7 @@ const ForumQuestion = (props:{ressort:string | string[], mutate:Function, setQue
                     return Object.values(item).join().toLowerCase().includes(theme.toLowerCase())
                 }))
             }
-      },[theme])
+      },[theme, data])
       const onSubmit = async (e:React.FormEvent)=>{
         e.preventDefault();
         const forumData = {

@@ -1,9 +1,9 @@
 import Forum from "@/models/Forum";
 import connect from "@/utils/db";
 import { NextApiRequest } from "next";
-import { NextResponse } from "next/server";
+import {NextRequest, NextResponse } from "next/server";
 
-const handler = async (req:NextApiRequest)=>{
+const handler = async (req:NextRequest)=>{
     if(req.method === "POST"){
         //@ts-ignore
         const data = await req.json();

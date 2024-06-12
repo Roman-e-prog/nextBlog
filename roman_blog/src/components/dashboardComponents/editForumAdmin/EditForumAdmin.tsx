@@ -47,6 +47,7 @@ const EditForumAdmin = (props:{setEdit:React.Dispatch<React.SetStateAction<boole
             if(res.ok){
                 await mutate('/api/forum/')
                 toast.success("Beitrag erfolgreich upgedated")
+                setEdit(false)
             }
         } catch(error:any){
             toast.error(error.message)

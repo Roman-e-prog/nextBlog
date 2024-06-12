@@ -22,7 +22,7 @@ const Dashboard = () => {
           toast.warning('Sie haben keine Berechtigung für diese Seite');
         }
     }
-    }, [session]);
+    }, [session, router]);
   return (
     <div className={styles.container}>
         <ToastContainer/>

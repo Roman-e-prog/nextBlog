@@ -23,7 +23,7 @@ const UeberMich = () => {
         if(error){
             toast.error(error)
         }
-    },[])
+    },[error])
     const {mutate} = useSWRConfig();
     const {register, handleSubmit, formState, reset} = useForm<FormValues>({
         defaultValues:{
@@ -53,7 +53,7 @@ const UeberMich = () => {
         if(isSubmitted){
             reset()
         }
-    })
+    }, [isSubmitted, reset])
     const [edit, setEdit] = useState(false);
     const [editId, setEditId] = useState("");
     const [editData, setEditData] = useState<UeberMichDocument | null>(null)
@@ -84,12 +84,12 @@ const UeberMich = () => {
             <div className={styles.headerWrapper}>
                 <h3 className="headline">Über mich</h3>
             </div>
-            {data ? data.map((item:UeberMichDocument)=>(
+            {data && data.length ? data.map((item:UeberMichDocument)=>(
                 <div className={styles.fieldWrapper} key={item._id}>
                     <p className={styles.content} data-testid="entrys">{item.myPerson}</p>
                     <div className={styles.iconWrapper}>
-                        <div className={styles.icons} onClick={()=>handleEdit(item._id)} id="editUeberMich"><span className="material-symbols-outlined" data-testid="editUeberMich">Edit</span></div>
-                        <div className={styles.icons} onClick={()=>handleDelete(item._id)}><span className="material-symbols-outlined" id="deleteUeberMich" data-testid="deleteUeberMich">Delete</span></div>
+                        <div className={styles.icons} onClick={()=>handleEdit(item._id)} id="editUeberMich" data-testid="editUeberMich"><span className="material-symbols-outlined">Edit</span></div>
+                        <div className={styles.icons} onClick={()=>handleDelete(item._id)} data-testid="deleteUeberMich"><span className="material-symbols-outlined" id="deleteUeberMich">Delete</span></div>
                     </div>
                 </div>
             )):null}
@@ -106,6 +106,7 @@ const UeberMich = () => {
                         cols={10}
                         rows={10}
                         id="myPerson"
+                        data-testid="myPerson"
                         className={styles.input}
                         {...register("myPerson",{
                             required:{

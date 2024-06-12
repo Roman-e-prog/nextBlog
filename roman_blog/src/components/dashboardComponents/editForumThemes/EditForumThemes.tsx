@@ -1,16 +1,21 @@
+"use client"
 import { ForumThemesDocument } from '@/models/ForumThemes'
 import React from 'react'
 import styles from './editForumThemes.module.css'
 import {useForm} from 'react-hook-form'
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from 'react-toastify';
+
 type FormValues = {
     theme:string,
     content:string,
 }
-const EditForumThemes = (props:{setEdit:React.Dispatch<React.SetStateAction<boolean>>, editId:string, editData:ForumThemesDocument | null, mutate:Function}) => {
+const EditForumThemes = (props:{setEdit:React.Dispatch<React.SetStateAction<boolean>>, edit:boolean, editId:string, editData:ForumThemesDocument | null, mutate:any}) => {
     const data = props.editData;
     const id = props.editId;
+    const setEdit = props.setEdit;
+    const mutate = props.mutate
+    console.log(mutate, 'here i am')
     const {register, handleSubmit, formState} = useForm<FormValues>({
         defaultValues:{
             theme:data!.theme,
@@ -24,16 +29,21 @@ const EditForumThemes = (props:{setEdit:React.Dispatch<React.SetStateAction<bool
                 theme:data.theme,
                 content:data.content,
             }
-            await fetch(`/api/forumThemes/${id}`,{
+            const response = await fetch(`/api/forumThemes/${id}`,{
                 method:"PUT",
                 headers:{
                     'Content-Type':'application/json'
                 },
                 body:JSON.stringify(updateData)
             })
-            props.mutate('/api/forumThemes')
-            toast.success("Update erfolgreich")
+            console.log(response, 'here response')
+            await mutate('/api/forumThemes/')
+                setEdit(false)
+                if(props.edit === false){
+                    toast.success("Update erfolgreich")
+                }
         } catch(error:any){
+            console.log(error, 'here is an error')
             toast.error(error)
         }
     }
@@ -51,6 +61,7 @@ const EditForumThemes = (props:{setEdit:React.Dispatch<React.SetStateAction<bool
                     <input 
                         type="text"
                         id="theme"
+                        data-testid="editTheme"
                         className={styles.input}
                         {...register("theme",{
                             required:{
@@ -66,6 +77,7 @@ const EditForumThemes = (props:{setEdit:React.Dispatch<React.SetStateAction<bool
                     <input 
                         type="text"
                         id="content"
+                        data-testid="editContent"
                         className={styles.input}
                         {...register("content",{
                             required:{

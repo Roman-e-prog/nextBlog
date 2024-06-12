@@ -1,9 +1,9 @@
 import UserMessages from "@/models/UserMessages";
 import connect from "@/utils/db";
 import { NextApiRequest } from "next";
-import {NextResponse} from 'next/server';
+import {NextRequest, NextResponse} from 'next/server';
 
-export const PUT = async (req:NextApiRequest,{params}:any)=>{
+export const PUT = async (req:NextRequest,{params}:any)=>{
     //@ts-ignore
     const data = await req.json();
     const id = params.id

@@ -1,9 +1,9 @@
 import Bibliothek from "@/models/Bibliothek";
 import connect from "@/utils/db";
 import { NextApiRequest } from "next";
-import {NextResponse} from 'next/server';
+import {NextRequest, NextResponse} from 'next/server';
 
-export const POST = async (req:NextApiRequest)=>{
+export const POST = async (req:NextRequest)=>{
     //@ts-ignore
     const data = await req.json();
     const newBibliothek = new Bibliothek(data)

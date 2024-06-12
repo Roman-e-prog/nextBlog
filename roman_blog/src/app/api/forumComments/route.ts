@@ -1,9 +1,9 @@
 import ForumComments from "@/models/ForumComments";
 import connect from "@/utils/db";
 import { NextApiRequest } from "next";
-import {NextResponse} from 'next/server';
+import {NextRequest, NextResponse} from 'next/server';
 
-export const POST = async (req:NextApiRequest)=>{
+export const POST = async (req:NextRequest)=>{
     //@ts-ignore
     const data = await req.json();
     console.log(data);
@@ -18,7 +18,6 @@ export const POST = async (req:NextApiRequest)=>{
     }
 }
 export const GET = async ()=>{
-    console.log("are there no headers")
     try{
         await connect();
         const getAllForumComments = await ForumComments.find();

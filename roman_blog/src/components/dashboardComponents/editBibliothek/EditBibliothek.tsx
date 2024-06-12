@@ -1,3 +1,4 @@
+"use client"
 import React from 'react'
 import styles from './editBibliothek.module.css'
 import {useFieldArray, useForm} from 'react-hook-form';
@@ -33,7 +34,8 @@ const EditBibliothek = (props:{setEdit:React.Dispatch<React.SetStateAction<boole
             body: JSON.stringify(data),
           });
           toast.success("Update erfolgreich");
-          props.mutate(`/api/bibliothek/${id}`);
+          await props.mutate('/api/bibliothek/');
+          props.setEdit(false)
         } catch (error: any) {
           toast.error(error.message);
         }

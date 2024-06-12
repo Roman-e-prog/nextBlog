@@ -1,12 +1,11 @@
 import User from "@/models/User";
 import connect from "@/utils/db";
 import { NextApiRequest, NextApiResponse } from "next";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import bcrypt from 'bcrypt';
-export const POST = async (req:NextApiRequest, res:NextApiResponse)=>{
+export const POST = async (req:NextRequest, res:NextResponse)=>{
     //@ts-ignore
     const data = await req.json();
-    console.log(data);
     const {vorname, nachname, username, email, password} = data;
     const salt = await bcrypt.genSalt(10);
     const hash = bcrypt.hashSync(password, salt);

@@ -23,7 +23,7 @@ const Login = () => {
         router.push('/')
       }
     }
-  },[session])
+  },[session, router])
     const {register, handleSubmit, formState, reset, watch} = useForm<FormValues>({
         defaultValues:{
             username:"",
@@ -59,7 +59,7 @@ const Login = () => {
         if(isSubmitted){
             reset();
         }
-    },[])
+    },[isSubmitted, reset])
     const onSubmit = (data:FormValues)=>{
       signIn("credentials", {
         username:data.username,
@@ -74,7 +74,7 @@ const Login = () => {
         <div className={styles.headerWrapper}>
           <h1 className={styles.heading}>Login</h1>
         </div>
-            <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+            <form className={styles.form} onSubmit={handleSubmit(onSubmit)} data-testid="loginForm">
             <div className={styles.formGroup}>
             <label htmlFor="username" className={styles.label}>Username</label>
             <input type="text"
@@ -118,7 +118,7 @@ const Login = () => {
                    <div className="errors">{errors.password?.message}</div>
           </div>
           <div className={styles.buttonWrapper}>
-          <button className={styles.sendBtn} type="submit" disabled={!isValid || !isDirty || isSubmitting} id="loginBtn">Absenden</button>
+          <button className={styles.sendBtn} type="submit" disabled={!isValid || !isDirty || isSubmitting} id="loginBtn" data-testid="loginBtn">Absenden</button>
           </div>
             </form>
             <button className={styles.forgottenButton} type="button" onClick={handleForgotten} id="forgottenBtn">Passwort vergessen</button>

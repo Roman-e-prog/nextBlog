@@ -31,7 +31,7 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
       return (
         <div>
           <h1>Oops! Something went wrong.</h1>
-          <p>We're sorry for the inconvenience. You might want to <a href="/">return to the homepage</a> or refresh the page.</p>
+          <p>We&apos;re sorry for the inconvenience. You might want to <a href="/">return to the homepage</a> or refresh the page.</p>
         </div>
       );
     }

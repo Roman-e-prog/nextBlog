@@ -24,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html lang="de">
+    <html lang="de" style={{background:"#333333"}}>
       <body className={roboto.className}>
         <ErrorBoundary>
           <ThemeProvider>

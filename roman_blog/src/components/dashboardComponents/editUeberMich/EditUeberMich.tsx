@@ -29,8 +29,10 @@ const EditUeberMich = (props:{setEdit:React.Dispatch<React.SetStateAction<boolea
                 },
                 body:JSON.stringify(updateData)
             })
-            props.mutate(`/api/ueberMich/${id}`)
+            await props.mutate('/api/ueberMich/')
+            props.setEdit(false)
             toast.success("Update erfolgreich")
+            
         } catch(error:any){
             toast.error(error)
         }

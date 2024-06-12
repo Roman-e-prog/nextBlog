@@ -31,7 +31,7 @@ const Register = () => {
     if(isSubmitted){
       reset()
     }
-  },[isSubmitted])
+  },[isSubmitted, reset])
   const onSubmit = async (data:FormValues)=>{
     const registerData = {
       vorname:data.vorname,
