@@ -1,4 +1,5 @@
 before_script:
+    - cd roman_blog
     - npm install
 run_jest_tests:
     image: node:lts-alpine
