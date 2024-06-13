@@ -1,3 +1,7 @@
+cache:
+  key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
+  paths:
+    - roman_blog/node_modules/
 before_script:
     - cd roman_blog
     - npm install
