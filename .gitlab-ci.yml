@@ -11,4 +11,5 @@ run_cypress_tests:
     - npm ci
     - npm run build
     - npm start &
+    - npx wait-on http://localhost:3000
     - npm run cypress:open
