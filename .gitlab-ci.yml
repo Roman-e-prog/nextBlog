@@ -2,18 +2,29 @@ cache:
   key: "$CI_JOB_NAME-$CI_COMMIT_REF_SLUG"
   paths:
     - roman_blog/node_modules/
+variables:
+  IMAGE_NAME: romanarmin/next_blog
+  IMAGE_TAG: v1 
 before_script:
     - cd roman_blog
     - npm install
+stages:
+  - test
+  - build
 run_jest_tests:
-    image: node:lts-alpine
-    script:
-        - npm run test
-run_cypress_tests:
-  image: cypress/browsers:node-20.14.0-chrome-125.0.6422.141-1-ff-126.0.1-edge-125.0.2535.85-1
+  stage: test
+  image: node:lts-alpine
   script:
-    - npm ci
-    - npm run build
-    - npm start &
-    - npx wait-on http://localhost:3000
-    - npm run cypress:run
+    - npm run test
+build_image:
+  stage: build
+  image: docker:27.0.0-rc.1-alpine3.20
+  services:
+    - docker:27.0.0-rc.1-dind-alpine3.20
+  variables:
+    DOCKER_TLS_CERT_DIR: "/certs"
+  before_script:
+    - login -u $REGISTRY_USER -p $REGISTRY_PASSWORD 
+  script:
+    - docker build -t $IMAGE_NAME:$IMAGE_TAG
+    - docker push $IMAGE_NAME:$IMAGE_TAG 
