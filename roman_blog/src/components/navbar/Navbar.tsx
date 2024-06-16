@@ -18,7 +18,7 @@ const Navbar = () => {
     <div className={styles.container}>
         <ToastContainer/>
         <div className={styles.logo} data-testid="logo">
-            <Link href="/" className='link'>
+            <Link href="/" className='link' data-testid="logoLink">
             <Image src="/images/roman.jpg" alt="Roman Armin Rostock" title="Zurück zur Hauptseite" priority={false} width={110} height={120}/>
             </Link>
         </div>

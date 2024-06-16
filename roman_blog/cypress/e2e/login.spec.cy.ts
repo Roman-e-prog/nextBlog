@@ -2,6 +2,8 @@ describe("All login functions work as expected", ()=>{
     it("login works, with expected redirection for user", ()=>{
         cy.visit('http://localhost:3000/authUser/login')
         cy.get("#username")
+        .wait(3000) // wait for 1 second
+        .focus()
         .type("TesterMartin")
         .should('have.value', 'TesterMartin')
         cy.get('#email')
@@ -29,9 +31,11 @@ describe("All login functions work as expected", ()=>{
         cy.url({timeout:30000})
         .should('eq', 'http://localhost:3000/dashboard')
     })
-    it.only("PasswordForgotten should work", ()=>{
+    it("PasswordForgotten should work", ()=>{
         cy.visit('http://localhost:3000/authUser/login')
         cy.get('#username')
+        .wait(1000) // wait for 1 second
+        .focus()
         .type("TesterMartin")
         .should('have.value', 'TesterMartin')
         cy.get('#email')

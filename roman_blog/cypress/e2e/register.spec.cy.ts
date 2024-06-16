@@ -1,23 +1,30 @@
 describe("Registration works", ()=>{
     it("testing registration", ()=>{
+      const uniqueSuffix = Date.now(); // get the current timestamp
+      const username = `TesterMartina${uniqueSuffix}`;
+      const email = `testerMartina${uniqueSuffix}@test.de`
       cy.visit("http://localhost:3000/authUser/register")
       cy.get("form")
       cy.get("#vorname")
-      .type("Martin")
-      .should('have.value', "Martin")
+      .wait(3000) // wait for 1 second
+      .focus()
+      .type("Martina")
+      .should('have.value', "Martina")
       cy.get("#nachname")
-      .type("Test")
-      .should('have.value', "Test")
+      .type("Tester")
+      .should('have.value', "Tester")
       cy.get("#username")
-      .type("TesterMartin")
-      .should('have.value', "TesterMartin")
+      .type(username)
+      .should('have.value', username)
       cy.intercept('POST', '/api/auth/unique').as('validate');
+      cy.wait(3000)
       cy.wait('@validate');
       cy.get('.errors').should('not.be.visible');
-      cy.get("#email")
-      .type("testerMartin@test.de")
-      .should('have.value', "testerMartin@test.de")
+      cy.get('#email')
+      .type(email)
+      .should('have.value', email)
       cy.intercept('POST', '/api/auth/unique').as('validate');
+      cy.wait(6000)
       cy.wait('@validate');
       cy.get('.errors').should('not.be.visible');
       cy.get("#password")

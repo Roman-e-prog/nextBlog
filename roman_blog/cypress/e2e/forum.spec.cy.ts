@@ -22,7 +22,7 @@ describe('test the functionallity of forum', ()=>{
         .should('have.length.lessThan', 1)
         cy.request('http://localhost:3000/api/forum').then((response)=>{
             const forumentrys = JSON.parse(response.body)
-            expect(forumentrys).to.have.length(5)
+            expect(forumentrys).to.have.length(6)
             cy.wrap(forumentrys)
             .each((forumentry)=>{
                 cy.get('body').then(($body) => {

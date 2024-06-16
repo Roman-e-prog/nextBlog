@@ -1,8 +1,8 @@
 describe("blogpost should be rendered and redirect to the correct id", ()=>{
     it("blogpost should have the correct length",()=>{
-        cy.request('http:localhost:3000/api/blogPosts').then((response)=>{
+        cy.request('/api/blogPosts').then((response)=>{
             const blogPosts = JSON.parse(response.body);
-            expect(blogPosts).to.have.length(6)
+            expect(blogPosts).to.have.length(8)
             cy.visit('http://localhost:3000/blog')
             cy.wrap(blogPosts)
             .each((blogPost)=>{
